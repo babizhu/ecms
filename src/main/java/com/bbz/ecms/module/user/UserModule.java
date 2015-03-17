@@ -1,5 +1,6 @@
 package com.bbz.ecms.module.user;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.joda.time.DateTime;
 import org.nutz.ioc.annotation.InjectName;
 import org.nutz.ioc.loader.annotation.IocBean;
@@ -16,7 +17,7 @@ import org.nutz.mvc.annotation.Ok;
 @InjectName
 @At("/user")
 public class UserModule{
-//    @RequiresPermissions("")
+    @RequiresPermissions("aabe:read:*")
 //    @RequiresPermissions("role:read:*")
 
     @At
