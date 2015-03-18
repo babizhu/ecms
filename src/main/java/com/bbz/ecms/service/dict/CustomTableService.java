@@ -1,28 +1,45 @@
 package com.bbz.ecms.service.dict;
 
-import com.bbz.ecms.domain.dict.CustomTable;
-import com.google.common.collect.Maps;
+import com.bbz.ecms.domain.dict.TableMeta;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import org.nutz.ioc.loader.annotation.IocBean;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * user         LIUKUN
- * time         2015/3/17 23:06
+ * time         2015-3-18 10:56
+ *
+ * 自定义表格的相关功能，常见的如增删改查
  */
-
+@IocBean
 public class CustomTableService{
 
-    Map<String,CustomTable> tableMap = Maps.newHashMap();
+    private final TableMetaService tableMetaService = TableMetaService.INSTANCE;
+    private final CustomTableDataProvider db = new CustomTableDataProvider();
 
-    CustomTable getTable(String tableName ){
-        CustomTable customTable = tableMap.get( tableName );
-        if( customTable == null ){
-            return null;
-        }
 
-        return customTable;
+    public CustomTableService(  ){
+
 
     }
 
+    public void replace(TableMeta tableMeta,DBObject data){
 
+
+        //db.replace( tableMeta, data );
+    }
+
+    public List<DBObject> query(String tableName,DBObject condition){
+
+        TableMeta tableMeta = tableMetaService.getTable( tableName );
+        if( tableMeta == null ){
+            return null;
+        }
+
+
+       return db.query( tableMeta,condition );
+    }
 }

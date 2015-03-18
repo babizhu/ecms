@@ -9,7 +9,7 @@ package com.bbz.ecms.domain.dict;
 
 
 public enum  FieldType{
-    INT,
+    NUM,
     STRING,
     DATE;
 
