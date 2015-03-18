@@ -19,18 +19,22 @@ public class CustomTableServiceTest{
         String tableName = "厂房资源";
         TableMeta tableMeta = TableMetaService.INSTANCE.getTable( tableName );
 
-        DBObject data = new BasicDBObject(  );
+        for( int i = 0; i < 100; i++ ) {
 
-        for( FieldMeta fieldMeta : tableMeta.getFields() ) {
-            if( fieldMeta.getFieldType() == FieldType.NUM ){
-                data.put( fieldMeta.getName(), new Random().nextInt() );
+
+            DBObject data = new BasicDBObject();
+
+            for( FieldMeta fieldMeta : tableMeta.getFields() ) {
+                if( fieldMeta.getFieldType() == FieldType.NUM ) {
+                    data.put( fieldMeta.getName(), new Random().nextDouble(  ) );
+                } else {
+                    data.put( fieldMeta.getName(), "测试" +i );
+                }
             }
-            else {
-                data.put( fieldMeta.getName(), "测试" );
-            }
+
+            data.put( "_id", i );
+            service.replace( tableMeta, data);
         }
-
-        service.replace( tableMeta, data);
     }
 
     @Test
