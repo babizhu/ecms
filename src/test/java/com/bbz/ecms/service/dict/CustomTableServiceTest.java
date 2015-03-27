@@ -19,7 +19,7 @@ public class CustomTableServiceTest{
         String tableName = "厂房资源";
         TableMeta tableMeta = TableMetaService.INSTANCE.getTable( tableName );
 
-        for( int i = 0; i < 100; i++ ) {
+        for( int i = 0; i < 1000; i++ ) {
 
 
             DBObject data = new BasicDBObject();

@@ -1,11 +1,9 @@
 package com.bbz.ecms.service.dict;
 
 import com.bbz.ecms.domain.dict.TableMeta;
-import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import org.nutz.ioc.loader.annotation.IocBean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,7 +27,7 @@ public class CustomTableService{
     public void replace(TableMeta tableMeta,DBObject data){
 
 
-        //db.replace( tableMeta, data );
+        db.replace( tableMeta, data );
     }
 
     public List<DBObject> query(String tableName,DBObject condition){
