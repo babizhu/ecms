@@ -87,7 +87,7 @@ Ext.define('ecms.view.content.grid.Qyzy', {
             {
                 text     : '厂房名称',
                 //flex     : 1,
-                sortable : false,
+
                 dataIndex: '厂房名称'
             },
             {
