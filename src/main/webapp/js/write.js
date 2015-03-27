@@ -271,7 +271,7 @@ Ext.onReady(function(){
 
     var main = Ext.create('Ext.container.Container', {
         padding: '0 0 0 20',
-        width: '80%',
+        width: '100%',
         height: Ext.themeName === 'neptune' ? 700 : 650,
         renderTo: document.body,
         layout: {

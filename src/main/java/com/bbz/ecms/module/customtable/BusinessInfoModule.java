@@ -35,6 +35,7 @@ public class BusinessInfoModule{
         }
         else {
             return DataParse.parseJson( query );
+
             //return "{\"success\":true,\"message\":\"Loaded data\",\"data\":[{\"id\":1,\"first\":\"Fred\",\"last\":\"Flintstone\",\"email\":\"fred@flintstone.com\"},{\"id\":2,\"first\":\"Wilma\",\"last\":\"Flintstone\",\"email\":\"wilma@flintstone.com\"},{\"id\":3,\"first\":\"Pebbles\",\"last\":\"Flintstone\",\"email\":\"pebbles@flintstone.com\"},{\"id\":4,\"first\":\"Barney\",\"last\":\"Rubble\",\"email\":\"barney@rubble.com\"},{\"id\":5,\"first\":\"Betty\",\"last\":\"Rubble\",\"email\":\"betty@rubble.com\"},{\"id\":6,\"first\":\"BamBam\",\"last\":\"Rubble\",\"email\":\"bambam@rubble.com\"}]}";
         }
     }
