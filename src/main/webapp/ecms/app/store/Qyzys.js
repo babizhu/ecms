@@ -7,13 +7,22 @@ Ext.define('ecms.store.Qyzys', {
     model: 'ecms.model.Qyzy',
     autoLoad: true,
     autoSync: true,
+    //remoteFilter: true,
+    //filters: [{
+    //    property: 'name',
+    //    value: '{nameField.value}'
+    //}],
     proxy: {
+        params: {
+            group: 3,
+            type: 'user'
+        },
         type: 'ajax',
         api: {
-            read: 'http://localhost:8080/business/time?tname=%E5%8E%82%E6%88%BF%E8%B5%84%E6%BA%90&_dc=1427441362528&page=1&start=0&limit=25',
-            //create: 'app.php/users/create',
-            //update: 'app.php/users/update',
-            //destroy: 'app.php/users/destroy'
+            read: 'http://localhost:8080/business/time?tname=%E5%8E%82%E6%88%BF%E8%B5%84%E6%BA%90',
+            create: 'http://localhost:8080/business/create?tname=%E5%8E%82%E6%88%BF%E8%B5%84%E6%BA%90',
+            update: 'http://localhost:8080/business/update?tname=%E5%8E%82%E6%88%BF%E8%B5%84%E6%BA%90',
+            destroy: 'http://localhost:8080/business/time?tname=%E5%8E%82%E6%88%BF%E8%B5%84%E6%BA%90'
         },
         reader: {
             type: 'json',
@@ -26,6 +35,7 @@ Ext.define('ecms.store.Qyzys', {
             writeAllFields: false,
             root: 'data'
         },
+
         listeners: {
             exception: function(proxy, response, operation){
                 Ext.MessageBox.show({
@@ -36,16 +46,7 @@ Ext.define('ecms.store.Qyzys', {
                 });
             }
         }
+
     }
-    //autoLoad:true,
-    //reader: {
-    //    type: 'json',
-    //    successProperty: 'success',
-    //    root: 'data',
-    //    messageProperty: 'message'
-    //},
-    //proxy: {
-    //    type: 'jsonp',
-    //    url : 'http://localhost:8080/business/time?tname=%E5%8E%82%E6%88%BF%E8%B5%84%E6%BA%90&_dc=1427441362528&page=1&start=0&limit=25'
-    //}
+
 });

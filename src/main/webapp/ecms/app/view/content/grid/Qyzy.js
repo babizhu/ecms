@@ -3,7 +3,6 @@
  * 厂房资源
  */
 Ext.define('ecms.view.content.grid.Qyzy', {
-    //extend: 'Ext.ux.LiveSearchGridPanel',
     extend: 'Ext.grid.Panel',
     requires: [
         'Ext.grid.column.Action',
@@ -12,52 +11,43 @@ Ext.define('ecms.view.content.grid.Qyzy', {
     xtype: 'qyzy-grid',
 
     controller: 'qyzy',
-
     store: 'Qyzys',
-    //stateful: true,
-    //collapsible: true,
     multiSelect: true,
     closable : true,
-    //stateId: 'stateGrid',
     itemId:'qyzy-grid',
     //height: 350,
     title: '<i class=\"icon-cog icon-1x\"></i> 企业资源',
-    //glyph: 99,
-
+    dockedItems: [{
+        xtype: 'toolbar',
+        dock: 'bottom',
+        items: [{
+            iconCls: 'icon-add',
+            text: '添加',
+            //scope: this,
+            handler: 'onAddClick'
+        }, {
+            iconCls: 'icon-save',
+            text: '提交数据',
+            //disabled: true,
+            itemId: 'submit',
+            //scope: this,
+            handler: 'onSubmit'
+        }]
+    }],
 
     viewConfig: {
         //enableTextSelection: true
     },
-    //dockedItems: [{
-    //    collapsible:true,
-    //    xtype: 'toolbar',
-    //    dock: 'top',
-    //    items: [
-    //        { xtype: 'button', text: 'Button 1' }
-    //    ]
-    //}],
+
     tbar: [{
 
         xtype: 'textfield',
         fieldLabel: '企业名称',
-        //forceSelection: true,
-        //queryMode: 'local',
-        //displayField: 'name',
-        //valueField: 'id',
-        //autoLoadOnValue: true,
 
-        // Giving this component a "reference" gives it a name for us in our View Controller
-        // and View Model. In this case, we need the selection ("value") of this field to
-        // control the filter of the grid's store. That is handled in the View Model's
-        // "stores" declaration. Normally fields bind their value and don't also publish
-        // it to the View Model so we have to instruct it to do so via "publishes".
-        reference: 'assigneeField',
-        publishes: ['value'],
+        reference: 'nameField',
+        id: 'username',
+        publishes: ['value']
 
-        bind: {
-            //store: '{theProject.users}',
-            //value: '{defaultUser}'  // this is a formula in our ViewModel so just oneway
-        }
     }, {
         xtype: 'combobox',
         fieldLabel: 'Status',
@@ -82,55 +72,99 @@ Ext.define('ecms.view.content.grid.Qyzy', {
     initComponent: function () {
         var me = this;
 
+        this.cellEditing = new Ext.grid.plugin.CellEditing({
+            clicksToEdit: 2
+        });
+
 
         me.columns = [
             {
                 text     : '厂房名称',
                 //flex     : 1,
 
-                dataIndex: '厂房名称'
+                dataIndex: '厂房名称',
+                editor: {
+                    allowBlank: false
+                }
             },
             {
                 text     : '占地面积（亩）',
 
                 sortable : true,
                 //formatter: 'usMoney',
-                dataIndex: '占地面积（亩）'
+                dataIndex: '占地面积（亩）',
+                editor: {
+                    xtype: 'numberfield',
+                    allowBlank: false,
+                    minValue: 0
+                    //maxValue: 100000
+                }
             },
             {
                 text     : '已招商面积（平方米）',
 
                 sortable : true,
                 //formatter: 'usMoney',
-                dataIndex: '已招商面积（平方米）'
+                dataIndex: '已招商面积（平方米）',
+                editor: {
+                    xtype: 'numberfield',
+                    allowBlank: false,
+                    minValue: 0
+                    //maxValue: 100000
+                }
             },
             {
                 text     : '建成面积（平方米）',
 
                 sortable : true,
                 //formatter: 'usMoney',
-                dataIndex: '建成面积（平方米）'
+                dataIndex: '建成面积（平方米）',
+                editor: {
+                    xtype: 'numberfield',
+                    allowBlank: false,
+                    minValue: 0
+                    //maxValue: 100000
+                }
             },
             {
                 text     : '建成剩余面积（平方米）',
 
                 sortable : true,
                 //formatter: 'usMoney',
-                dataIndex: '建成剩余面积（平方米）'
+                dataIndex: '建成剩余面积（平方米）',
+                editor: {
+                    xtype: 'numberfield',
+                    allowBlank: false,
+                    minValue: 0
+                    //maxValue: 100000
+                }
             },
             {
                 text     : '使用情况',
-
                 sortable : true,
                 //formatter: 'usMoney',
-                dataIndex: '使用情况'
+                dataIndex: '使用情况',
+                editor: {
+                    xtype: 'numberfield',
+                    allowBlank: false,
+                    minValue: 0,
+                    decimalPrecision:4
+                    //maxValue: 100000
+                }
             },
             {
                 text     : '规划总面积（平方米）',
 
                 sortable : true,
                 //formatter: 'usMoney',
-                dataIndex: '规划总面积（平方米）'
+                dataIndex: '规划总面积（平方米）',
+                editor: {
+                    xtype: 'numberfield',
+                    decimalPrecision:4,
+                    allowBlank: false,
+                    minValue: 0
+                    //maxValue: 100000
+                }
             },
             {
                 menuDisabled: true,
@@ -170,7 +204,13 @@ Ext.define('ecms.view.content.grid.Qyzy', {
         ];
 
         me.callParent();
+        Ext.apply(this, {
+
+            plugins: [this.cellEditing]
+        });
+        //this.getSelectionModel().on('selectionchange', this.onSelectChange, this);
+    },
+    onSelectChange: function(selModel, selections){
+        this.down('#submit').setDisabled(selections.length === 0);
     }
-
-
 });
