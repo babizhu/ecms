@@ -67,6 +67,7 @@ public class LoginModule{
     @RequiresAuthentication
     public void logout() {
         Subject currentUser = SecurityUtils.getSubject();
+        System.out.println(currentUser.getPrincipals( ));
         try {
             currentUser.logout();
         } catch (SessionException ise) {

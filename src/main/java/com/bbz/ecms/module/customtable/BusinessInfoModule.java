@@ -7,10 +7,15 @@ import com.mongodb.DBObject;
 import org.nutz.ioc.annotation.InjectName;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
+import org.nutz.mvc.adaptor.JsonAdaptor;
+import org.nutz.mvc.adaptor.VoidAdaptor;
+import org.nutz.mvc.annotation.AdaptBy;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.annotation.Param;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -40,13 +45,39 @@ public class BusinessInfoModule{
         }
     }
     @At
-    public String create( @Param("tname") String tableName ){
+    @AdaptBy(type=VoidAdaptor.class)
+    public String create( HttpServletRequest req ) throws IOException{
+        System.out.println( req.getParameterMap() );
+        System.out.println("req.getMethod()" + req.getMethod() );
+        System.out.println( "req.getParameterMap()" + req.getParameterMap() );
+        System.out.println( "req.getParameterMap()" + req.getParameterNames() );
+        System.out.println( "req.getHeaderNames()" + req.getHeaderNames() );
 
+        for( Object key: req.getParameterMap().keySet() ) {
+            System.out.println( "key=" + key);
+        }
+
+        StringBuffer out = new StringBuffer();
+        byte[] b = new byte[4096];
+        for (int n; (n = req.getInputStream().read( b )) != -1;) {
+            out.append(new String(b, 0, n));
+        }
+        System.out.println( out.toString() );
         return "{\"success\":true}";
     }
     @At
-    public String update( @Param("tname") String tableName ){
+    @AdaptBy(type=JsonAdaptor.class)
+    public String update( @Param("data") String data ){
+        System.out.println( "data = " + data );
         return "{\"success\":true}";
 
     }
+
+//    @At
+//    //@AdaptBy(type=JsonAdaptor.class)
+//    public String update( @Param("id") String name ){
+//        System.out.println("id" + name);
+//        return "{\"success\":true}";
+//
+//    }
 }

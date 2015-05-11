@@ -1,5 +1,6 @@
 package com.bbz.ecms;
 
+import com.bbz.ecms.domain.data.Qyzy;
 import com.bbz.ecms.domain.user.Permission;
 import com.bbz.ecms.domain.user.Role;
 import com.bbz.ecms.domain.user.User;
@@ -24,26 +25,28 @@ public class CmsSetup implements Setup{
     @Override
     public void init( NutConfig config ){
         Ioc ioc = config.getIoc();
-        Dao dao = ioc.get(Dao.class);
+        Dao dao = ioc.get( Dao.class );
+
 
         //若必要的数据表不存在，则初始化数据库
-        if (!dao.exists(User.class)) {
-            dao.create(User.class, true);
-            dao.create(Role.class, true);
-            dao.create(Permission.class, true);
+        if( !dao.exists( User.class ) ) {
+            dao.create( User.class, true );
+            dao.create( Role.class, true );
+            dao.create( Permission.class, true );
+            dao.create( Qyzy.class, true );
 
-            FileSqlManager fm = new FileSqlManager("ecms.sql");
-            List<Sql> sqlList = fm.createCombo(fm.keys());
-            dao.execute(sqlList.toArray(new Sql[sqlList.size()]));
+            FileSqlManager fm = new FileSqlManager( "ecms.sql" );
+            List<Sql> sqlList = fm.createCombo( fm.keys() );
+            dao.execute( sqlList.toArray( new Sql[sqlList.size()] ) );
             // 初始化用户密码（全部都是123）及salt
-            List<User> userList = dao.query(User.class, null);
-            for (User user : userList) {
+            List<User> userList = dao.query( User.class, null );
+            for( User user : userList ) {
                 RandomNumberGenerator rng = new SecureRandomNumberGenerator();
                 String salt = rng.nextBytes().toBase64();
-                String hashedPasswordBase64 = new Sha256Hash("123", salt, 1024).toBase64();
-                user.setSalt(salt);
-                user.setPassword(hashedPasswordBase64);
-                dao.update(user);
+                String hashedPasswordBase64 = new Sha256Hash( "123", salt, 1024 ).toBase64();
+                user.setSalt( salt );
+                user.setPassword( hashedPasswordBase64 );
+                dao.update( user );
             }
         }
     }

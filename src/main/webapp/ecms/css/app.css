@@ -29,3 +29,8 @@
 .icon-delete {
     background-image: url(../img/delete.png) !important;
 }
+
+.x-selectable, .x-selectable * {
+    -moz-user-select: text!important;
+    -khtml-user-select: text!important;
+}  

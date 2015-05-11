@@ -12,9 +12,12 @@ import org.nutz.mvc.ioc.provider.ComboIocProvider;
 //@Modules({ UserModule.class, LoginModule.class,})
 //@Modules(value={Abc.class, Xyz.class}, scanPackage = true)
 @Modules(scanPackage = true)
-//@SetupBy(CmsSetup.class)
-@IocBy(type = ComboIocProvider.class, args = { "*org.nutz.ioc.loader.json.JsonLoader", "dao.js",
-        "*org.nutz.ioc.loader.annotation.AnnotationIocLoader", "com.bbz.ecms" })
+@SetupBy(CmsSetup.class)
+@IocBy(type=ComboIocProvider.class, args={"*js", "ioc/",
+        "*anno", "com.bbz.ecms",
+        "*tx"})
+//@IocBy(type = ComboIocProvider.class, args = { "*org.nutz.ioc.loader.json.JsonLoader", "*.js",
+//        "*org.nutz.ioc.loader.annotation.AnnotationIocLoader", "com.bbz.ecms" })
 
 //@IocBy(type = ComboIocProvider.class, args = { "*org.nutz.ioc.loader.json.JsonLoader", "dao.js" })
 @Fail("json")

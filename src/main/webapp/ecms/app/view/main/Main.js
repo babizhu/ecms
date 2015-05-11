@@ -108,7 +108,7 @@ Ext.define('ecms.view.main.Main', {
         cls: 'appBanner',
         padding: 5,
         height: 50,
-        html: '<h3>游戏后台管理系统</h3>'
+        html: '<h3>招商载体信息系统</h3>'
         //    xtype: 'themechoose',
 
     }]

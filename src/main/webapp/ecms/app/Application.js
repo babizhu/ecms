@@ -42,5 +42,7 @@ Ext.define('ecms.Application', {
         // otherwise, we display the main view
         Ext.widget(loggedIn ? 'app-main' : 'login');
 
+
+
     }
 });

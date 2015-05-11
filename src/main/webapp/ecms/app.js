@@ -6,9 +6,17 @@
 Ext.application({
     name: 'ecms',
 
-    extend: 'ecms.Application'
-    
-    //autoCreateViewport: 'ecms.view.main.Main'
+    extend: 'ecms.Application',
+    init:function() {
+
+        Ext.EventManager.on(window, 'beforeunload', function() {
+            return 'Your changes are be lost.';
+        });
+        Ext.get(window).on('beforeunload',function(e){return (window.event.returnValue=e.returnValue='确认离开当前页面？')});
+    }
+
+
+        //autoCreateViewport: 'ecms.view.main.Main'
 	
     //-------------------------------------------------------------------------
     // Most customizations should be made to ecms.Application. If you need to

@@ -8,11 +8,14 @@ var store = Ext.create('Ext.data.TreeStore', {
         expanded: true,
         children: [
             { text: "用户管理", leaf: true },
-            { text: "字段管理", expanded: true, children: [
-                { text: "厂房资源", leaf: true,grid:'cfzy-grid' },
-                { text: "企业资源", leaf: true,grid:'qyzy-grid'}
+            { text: "招商载体", expanded: true, children: [
+                { text: "企业闲置土地", leaf: true,grid:'cfzy-grid' },
+                { text: "已征未出让地", leaf: true,grid:'qyzy-grid'},
+                { text: "标准厂房", leaf: true,grid:'qyzy-grid'},
+                { text: "闲置房源", leaf: true,grid:'qyzy-grid'}
             ] },
-            { text: "诉讼程序", leaf: true }
+            { text: "企业运行", leaf: true },
+            { text: "工作简讯", leaf: true }
         ]
     }
 });

@@ -25,7 +25,7 @@ public class ShiroDbRealm extends AuthorizingRealm{
     private UserService userService;
     private RoleService roleService;
 
-    private UserService getUserService() {
+    public UserService getUserService() {
         if (userService == null) {
             Ioc ioc = Mvcs.getIoc();
             userService = ioc.get(UserService.class);
@@ -73,6 +73,7 @@ public class ShiroDbRealm extends AuthorizingRealm{
             return null;
         }
     }
+
 
     /**
      * 更新用户授权信息缓存.

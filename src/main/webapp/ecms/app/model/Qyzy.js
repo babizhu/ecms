@@ -6,14 +6,14 @@ Ext.define('ecms.model.Qyzy', {
     extend: 'Ext.data.Model',
     fields: [
 
-
-        {name: '厂房名称'},
-        {name: '占地面积（亩）', type: 'float'},
-        {name: '已招商面积（平方米）', type: 'float'},
-        {name: '建成面积（平方米）', type: 'float'},
-        {name: '建成剩余面积（平方米）', type: 'float'},
-        {name: '使用情况', type: 'float'},
-        {name: '规划总面积（平方米）', type: 'float'}
+        {name: 'id',type: 'int'},
+        {name: 'name'},
+        {name: 'zdmj', type: 'float'},
+        {name: 'yzsmj', type: 'float'},
+        {name: 'jcmj', type: 'float'},
+        {name: 'jcsymj', type: 'float'},
+        {name: 'syqk', type: 'float'},
+        {name: 'ghzmj', type: 'float'}
 
         //{name: 'change', type: 'float'},
         //{name: 'pctChange', type: 'float'},
