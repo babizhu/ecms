@@ -1,11 +1,16 @@
 package com.bbz.ecms.module.user;
 
+import com.bbz.ecms.domain.user.User;
+import com.bbz.ecms.service.user.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.joda.time.DateTime;
 import org.nutz.ioc.annotation.InjectName;
+import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.Ok;
+import org.nutz.mvc.annotation.Param;
+
+import java.util.List;
 
 /**
  * user         LIUKUN
@@ -13,17 +18,28 @@ import org.nutz.mvc.annotation.Ok;
  */
 
 
+@SuppressWarnings("unused")
 @IocBean
 @InjectName
 @At("/user")
+@Ok("json")
 public class UserModule{
+    @Inject
+    private UserService userService;
+
     @RequiresPermissions("aabe:read:*")
 //    @RequiresPermissions("role:read:*")
 
-    @At
-    @Ok("json")
-    public String time() {
 
-        return new DateTime().toString(  );
+
+
+    public List<User> read( @Param("name") String name,
+                            @Param("zdmjMin") String zsmjMin,
+                            @Param("zdmjMax") String zsmjMax ){
+
+
+
+        return userService.list();
+
     }
 }

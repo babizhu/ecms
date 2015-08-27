@@ -7,7 +7,7 @@ var store = Ext.create('Ext.data.TreeStore', {
     root: {
         expanded: true,
         children: [
-            { text: "用户管理", leaf: true },
+            { text: "用户管理", leaf: true,grid:'user-grid' },
             { text: "招商载体", expanded: true, children: [
                 { text: "企业闲置土地", leaf: true,grid:'cfzy-grid' },
                 { text: "已征未出让地", leaf: true,grid:'qyzy-grid'},

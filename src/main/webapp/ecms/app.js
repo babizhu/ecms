@@ -12,7 +12,7 @@ Ext.application({
         Ext.EventManager.on(window, 'beforeunload', function() {
             return 'Your changes are be lost.';
         });
-        Ext.get(window).on('beforeunload',function(e){return (window.event.returnValue=e.returnValue='确认离开当前页面？')});
+        //Ext.get(window).on('beforeunload',function(e){return (window.event.returnValue=e.returnValue='确认离开当前页面？')});
     }
 
 
